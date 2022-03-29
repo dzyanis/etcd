@@ -97,6 +97,7 @@ func write(key string, value string, version int64) error {
 		fmt.Printf("failed to send a request to storage: %s\n", err)
 		os.Exit(1)
 	}
+	defer httpResp.Body.Close()
 
 	respBytes, err := io.ReadAll(httpResp.Body)
 	if err != nil {
@@ -135,6 +136,7 @@ func read(key string) (string, int64) {
 		fmt.Printf("failed to send a request to storage: %s\n", err)
 		os.Exit(1)
 	}
+	defer httpResp.Body.Close()
 
 	respBytes, err := io.ReadAll(httpResp.Body)
 	if err != nil {

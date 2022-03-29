@@ -210,12 +210,12 @@ func TestPutAndGetKeyValue(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	defer resp.Body.Close()
 
 	data, err := io.ReadAll(resp.Body)
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer resp.Body.Close()
 
 	if gotValue := string(data); wantValue != gotValue {
 		t.Fatalf("expect %s, got %s", wantValue, gotValue)
